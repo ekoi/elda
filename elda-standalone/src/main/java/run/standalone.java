@@ -8,26 +8,23 @@
 
 package run;
 
-import java.io.File;
-
-import org.apache.catalina.startup.Tomcat;
 
 public class standalone {	
 	
 	static final String contextPath = "/standalone";
 
 	public static void main( String [] args ) throws Exception {  
-	    Tomcat server = new Tomcat(); 
-	    int port = 8080;
-	    String portString = System.getProperty("elda.port");
-	    if (portString != null) port = Integer.parseInt(portString);
-	//
-	    server.setPort(port);  
-	    server.setBaseDir(".");
-	//
-	    server.addWebapp(contextPath, new File("src/main/webapp").getAbsolutePath());
-	//
-	    server.start();
-	    server.getServer().await();
+//	    Tomcat server = new Tomcat(); 
+//	    int port = 8080;
+//	    String portString = System.getProperty("elda.port");
+//	    if (portString != null) port = Integer.parseInt(portString);
+//	//
+//	    server.setPort(port);  
+//	    server.setBaseDir(".");
+//	//
+//	    server.addWebapp(contextPath, new File("src/main/webapp").getAbsolutePath());
+//	//
+//	    server.start();
+//	    server.getServer().await();
 	} 
 }
