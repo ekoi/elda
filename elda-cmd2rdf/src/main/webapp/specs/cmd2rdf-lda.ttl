@@ -1,0 +1,96 @@
+#
+# A CMD2RDF config. 
+#
+
+# Assorted prefix declarations. Some of them are for the structuring
+# of the API config, others are for the vocabulary definitions.
+#
+
+@prefix api:                <http://purl.org/linked-data/api/vocab#> .
+@prefix dct:				<http://purl.org/dc/terms/> .
+
+@prefix rdf:                <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:               <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:                <http://www.w3.org/2001/XMLSchema#> .
+
+# The elda namespace/prefix is for Elda extensions to the LDA specification.
+@prefix elda:               <http://www.epimorphics.com/vocabularies/lda#> .
+
+# Prefix for example-local entities.
+@prefix cmd: 				<https://catalog.clarin.eu/ds/cmd2rdf/graph> .
+# ---------------------------------------------------------------------
+# API config
+
+cmd:cmd2rdf-lda a api:API 
+	; rdfs:label "CMD2RDF World example API -- games"@en
+	; api:sparqlEndpoint <http://localhost:8080/cmd2rdf/sparql?format=application/atom+xml>
+	# ; api:defaultViewer api:labelledDescribeViewer
+	; api:defaultFormatter cmd:HtmlFormatter 
+    ; api:formatter
+        [a elda:FeedFormatter
+        ; api:name "atom"
+        ; elda:className "com.epimorphics.lda.renderers.FeedRendererFactory"
+        ; api:mimeType "application/atom+xml"
+        ]
+	; api:endpoint cmd:browse 
+	.
+	
+# Endpoint definition	
+	
+cmd:browse a api:ListEndpoint 
+	; rdfs:label "Browse CMD2RDF Records" 
+	; api:uriTemplate "/browse" 
+	; api:selector 
+        [ api:where "<https://catalog.clarin.eu/ds/cmd2rdf/graph/FOLDERX/oai_beeldengeluid_nl_Expressie_1002463.rdf> ?item ?o "
+        ]	
+	.	
+#
+# This XSLT formatter produces rich HTML from the viewer properties.
+#
+
+cmd:HtmlFormatter a api:XsltFormatter 
+	; api:name "html" 
+	; api:mimeType "text/html; charset=utf-8" 
+	; api:stylesheet "lda-assets/xslt/result-osm-trimmed.xsl"
+	# ; elda:shortnameMode elda:roundTrip
+	.
+
+cmd:BoardGame a rdfs:Class
+	; rdfs:label "Board Game"
+	; api:label "BoardGame"
+	.
+	
+cmd:players a rdf:Property
+	; api:label "players"
+	; rdfs:range xsd:int
+	.
+	
+cmd:designed-by a rdf:Property
+	; api:label "designedBy"
+	.
+	
+cmd:designer-of a rdf:Property
+	; api:label "designerOf"
+	.
+	
+cmd:pubDate a rdf:Property
+	; api:label "publicationDate"
+	; rdfs:range xsd:integer
+	.
+	
+cmd:title a rdf:Property
+	; api:label "title"
+	.
+		
+cmd:pubYear a rdf:Property
+	; api:label "publicationYear"
+	; rdfs:range xsd:integer
+    ; rdfs:comment "The subject is some published entity, the object is the year of its publication."
+    ; rdfs:range xsd:integer
+	.
+    
+cmd:playTimeMinutes a rdf:Property
+	; api:label "playTimeMinutes"
+	; rdfs:label "playTimeMinutes"
+	; rdfs:range xsd:integer
+	.	
