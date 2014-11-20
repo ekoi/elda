@@ -22,7 +22,7 @@
 # API config
 
 cmd:cmd2rdf-lda a api:API 
-	; rdfs:label "CMD2RDF World example API -- games"@en
+	; rdfs:label "CMD2RDF LDA API -- browse "@en
 	; api:sparqlEndpoint <http://localhost:8080/cmd2rdf/sparql?format=application/atom+xml>
 	# ; api:defaultViewer api:labelledDescribeViewer
 	; api:defaultFormatter cmd:HtmlFormatter 
@@ -40,8 +40,10 @@ cmd:cmd2rdf-lda a api:API
 cmd:browse a api:ListEndpoint 
 	; rdfs:label "Browse CMD2RDF Records" 
 	; api:uriTemplate "/browse" 
+	#; api:itemTemplate "http://localhost:8080/cmd2rdf/graph/{number}"
+  
 	; api:selector 
-        [ api:where "<https://catalog.clarin.eu/ds/cmd2rdf/graph/FOLDERX/oai_beeldengeluid_nl_Expressie_1002463.rdf> ?item ?o "
+        [ api:where "<http://localhost:8080/cmd2rdf/graph/oai_childes_psy_cmu_edu_Biling_AarsenBos.rdf> ?item ?o "
         ]	
 	.	
 #
