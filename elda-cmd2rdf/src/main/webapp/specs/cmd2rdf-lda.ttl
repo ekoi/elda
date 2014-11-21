@@ -23,7 +23,7 @@
 
 cmd:cmd2rdf-lda a api:API 
 	; rdfs:label "CMD2RDF LDA API -- browse "@en
-	; api:sparqlEndpoint <http://localhost:8080/cmd2rdf/sparql?format=application/atom+xml>
+	; api:sparqlEndpoint <http://localhost:8880/cmd2rdf/sparql?format=application/atom+xml>
 	# ; api:defaultViewer api:labelledDescribeViewer
 	; api:defaultFormatter cmd:HtmlFormatter 
     ; api:formatter
@@ -39,11 +39,11 @@ cmd:cmd2rdf-lda a api:API
 	
 cmd:browse a api:ListEndpoint 
 	; rdfs:label "Browse CMD2RDF Records" 
-	; api:uriTemplate "/browse" 
-	#; api:itemTemplate "http://localhost:8080/cmd2rdf/graph/{number}"
+	; api:uriTemplate "/browse/{uri}" 
+	; api:variable [api:name "uri"]
   
 	; api:selector 
-        [ api:where "<http://localhost:8080/cmd2rdf/graph/oai_childes_psy_cmu_edu_Biling_AarsenBos.rdf> ?item ?o "
+        [ api:where "graph ?g {?item ?p ?o}. FILTER((strStarts(str(?g), REPLACE(str('http://localhost:8080/cmd2rdf/graph/?uri'),'\"',''))))"
         ]	
 	.	
 #
