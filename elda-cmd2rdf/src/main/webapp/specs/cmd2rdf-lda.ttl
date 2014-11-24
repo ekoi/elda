@@ -18,6 +18,8 @@
 
 # Prefix for example-local entities.
 @prefix cmd: 				<https://catalog.clarin.eu/ds/cmd2rdf/graph> .
+
+@prefix vlo:				<http://www.clarin.eu/vlo/>					.
 # ---------------------------------------------------------------------
 # API config
 
@@ -39,11 +41,11 @@ cmd:cmd2rdf-lda a api:API
 	
 cmd:browse a api:ListEndpoint 
 	; rdfs:label "Browse CMD2RDF Records" 
-	; api:uriTemplate "/browse/{uri}" 
-	; api:variable [api:name "uri"]
+	; api:uriTemplate "/browse" 
+	#; api:variable [api:name "uri"]
   
 	; api:selector 
-        [ api:where "graph ?g {?item ?p ?o}. FILTER((strStarts(str(?g), REPLACE(str('http://localhost:8080/cmd2rdf/graph/?uri'),'\"',''))))"
+        [ api:where "?item a <http://www.w3.org/ns/oa#Annotation>"
         ]	
 	.	
 #
@@ -96,3 +98,15 @@ cmd:playTimeMinutes a rdf:Property
 	; rdfs:label "playTimeMinutes"
 	; rdfs:range xsd:integer
 	.	
+
+vlo:hasFacetNameElementValue a rdf:Property
+	; api:label "name"
+	; rdfs:label "name"
+	; rdfs:range xsd:string
+	.
+	
+vlo:hasFacetNationalProjectElementValue  a rdf:Property
+	; api:label "NationalProject"
+	; rdfs:label "NationalProject"
+	; rdfs:range xsd:string
+	.
