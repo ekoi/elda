@@ -17,7 +17,7 @@
 @prefix elda:               <http://www.epimorphics.com/vocabularies/lda#> .
 
 # Prefix for example-local entities.
-@prefix cmd: 				<https://catalog.clarin.eu/ds/cmd2rdf/graph> .
+@prefix cmd: 				<https://catalog.clarin.eu/ds/> .
 
 @prefix vlo:				<http://www.clarin.eu/vlo/>					.
 # ---------------------------------------------------------------------
@@ -25,7 +25,7 @@
 
 cmd:cmd2rdf-lda a api:API 
 	; rdfs:label "CMD2RDF LDA API -- browse "@en
-	; api:sparqlEndpoint <https://catalog.clarin.eu/ds/cmd2rdf/sparql?format=application/atom+xml>
+	; api:sparqlEndpoint <http://localhost:8080/ds/cmd2rdf/sparql>
 	# ; api:defaultViewer api:labelledDescribeViewer
 	;api:defaultViewer api:cmdViewer
 	; api:defaultFormatter cmd:HtmlFormatter 
