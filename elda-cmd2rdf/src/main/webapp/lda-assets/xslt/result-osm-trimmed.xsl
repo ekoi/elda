@@ -2212,7 +2212,7 @@ $prefLabel, $altLabel, $title and $name variables.
             </xsl:if>
             <th class="label">
                 <xsl:apply-templates select="." mode="label">
-                    <xsl:with-param name="addLink" select="true()" />
+                    <xsl:with-param name="addLink" select="false()" />
                 </xsl:apply-templates>
             </th>
             <xsl:choose>
