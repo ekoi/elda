@@ -25,7 +25,7 @@
 
 cmd:cmd2rdf-lda a api:API 
 	; rdfs:label "CMD2RDF LDA API -- browse "@en
-	; api:sparqlEndpoint <http://localhost:8080/cmd2rdf/sparql?format=application/atom+xml>
+	; api:sparqlEndpoint <https://catalog.clarin.eu/ds/cmd2rdf/sparql?format=application/atom+xml>
 	# ; api:defaultViewer api:labelledDescribeViewer
 	;api:defaultViewer api:cmdViewer
 	; api:defaultFormatter cmd:HtmlFormatter 
