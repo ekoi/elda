@@ -25,8 +25,9 @@
 
 cmd:cmd2rdf-lda a api:API 
 	; rdfs:label "CMD2RDF LDA API -- browse "@en
-	; api:sparqlEndpoint <http://localhost:8880/cmd2rdf/sparql?format=application/atom+xml>
+	; api:sparqlEndpoint <http://localhost:8080/cmd2rdf/sparql?format=application/atom+xml>
 	# ; api:defaultViewer api:labelledDescribeViewer
+	;api:defaultViewer api:cmdViewer
 	; api:defaultFormatter cmd:HtmlFormatter 
     ; api:formatter
         [a elda:FeedFormatter
@@ -34,7 +35,30 @@ cmd:cmd2rdf-lda a api:API
         ; elda:className "com.epimorphics.lda.renderers.FeedRendererFactory"
         ; api:mimeType "application/atom+xml"
         ]
-	; api:endpoint cmd:browse 
+	; api:endpoint cmd:browse, cmd:explore
+	.
+api:cmdViewer a api:Viewer;
+	api:name "cmdi2rdf";
+	api:property rdfs:label, 
+			vlo:hasFacetNameElementValue
+			, vlo:hasFacetDescriptionElementValue
+			#, vlo:hasFacetProjectNameElementValue 
+			, vlo:hasFacetCollectionElementValue
+			#, vlo:hasFacetYearElementValue
+			#, vlo:hasFacetContinentElementValue
+			#, vlo:hasFacetCountryElementValue
+			, vlo:hasFacetLanguageElementValue
+			#, vlo:hasFacetLanguageCodeElementValue
+			, vlo:hasFacetLanguageCodeElementEntity
+			#, vlo:hasFacetLanguagesElementValue
+			#, vlo:hasFacetOrganisationElementValue
+			#, vlo:hasFacetOrganisationElementEntity
+			#, vlo:hasFacetGenreElementValue
+			, vlo:hasFacetSubjectElementValue
+			, vlo:hasFacetResourceClassElementValue
+			#, vlo:hasFacetFormatElementValue
+			, vlo:hasFacetNationalProjectElementValue
+			#, vlo:hasFacetKeywordsElementValue
 	.
 	
 # Endpoint definition	
@@ -45,7 +69,16 @@ cmd:browse a api:ListEndpoint
 	#; api:variable [api:name "uri"]
   
 	; api:selector 
-        [ api:where "?item a <http://www.w3.org/ns/oa#Annotation>"
+        [ api:where " ?item a <http://www.w3.org/ns/oa#Annotation> . "
+        ]	
+	.	
+	
+cmd:explore a api:ListEndpoint 
+	; rdfs:label "Explore CMD2RDF Records" 
+	; api:uriTemplate "/explore" 
+  
+	; api:selector 
+        [ api:where " ?item a <http://www.w3.org/ns/oa#Annotation> . "
         ]	
 	.	
 #
@@ -59,54 +92,115 @@ cmd:HtmlFormatter a api:XsltFormatter
 	# ; elda:shortnameMode elda:roundTrip
 	.
 
-cmd:BoardGame a rdfs:Class
-	; rdfs:label "Board Game"
-	; api:label "BoardGame"
-	.
-	
-cmd:players a rdf:Property
-	; api:label "players"
-	; rdfs:range xsd:int
-	.
-	
-cmd:designed-by a rdf:Property
-	; api:label "designedBy"
-	.
-	
-cmd:designer-of a rdf:Property
-	; api:label "designerOf"
-	.
-	
-cmd:pubDate a rdf:Property
-	; api:label "publicationDate"
-	; rdfs:range xsd:integer
-	.
-	
-cmd:title a rdf:Property
-	; api:label "title"
-	.
-		
-cmd:pubYear a rdf:Property
-	; api:label "publicationYear"
-	; rdfs:range xsd:integer
-    ; rdfs:comment "The subject is some published entity, the object is the year of its publication."
-    ; rdfs:range xsd:integer
-	.
-    
-cmd:playTimeMinutes a rdf:Property
-	; api:label "playTimeMinutes"
-	; rdfs:label "playTimeMinutes"
-	; rdfs:range xsd:integer
-	.	
 
+vlo:hasFacetCollectionElementValue a rdf:Property
+	; api:label "collection"
+	; rdfs:label "collection"
+	; rdfs:range xsd:string
+	.
+	
+vlo:hasFacetProjectNameElementValue a rdf:Property
+	; api:label "project"
+	; rdfs:label "project"
+	; rdfs:range xsd:string
+	.
+	
 vlo:hasFacetNameElementValue a rdf:Property
 	; api:label "name"
 	; rdfs:label "name"
 	; rdfs:range xsd:string
 	.
 	
-vlo:hasFacetNationalProjectElementValue  a rdf:Property
+vlo:hasFacetYearElementValue a rdf:Property
+	; api:label "year"
+	; rdfs:label "year"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetContinentElementValue a rdf:Property
+	; api:label "continent"
+	; rdfs:label "continent"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetCountryElementValue a rdf:Property
+	; api:label "country"
+	; rdfs:label "country"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetLanguageElementValue a rdf:Property
+	; api:label "language"
+	; rdfs:label "language"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetLanguageCodeElementValue a rdf:Property
+	; api:label "languageCode"
+	; rdfs:label "language Code"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetLanguageCodeElementEntity a rdf:Property
+	; api:label "languageCode"
+	; rdfs:label "language Code"
+	.
+
+vlo:hasFacetLanguagesElementValue a rdf:Property
+	; api:label "languages"
+	; rdfs:label "languages"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetOrganisationElementValue a rdf:Property
+	; api:label "organisation"
+	; rdfs:label "organisation"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetOrganisationElementEntity a rdf:Property
+	; api:label "organisation"
+	; rdfs:label "organisation"
+	.
+	
+vlo:hasFacetGenreElementValue a rdf:Property
+	; api:label "genre"
+	; rdfs:label "genre"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetSubjectElementValue a rdf:Property
+	; api:label "subject"
+	; rdfs:label "subject"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetDescriptionElementValue a rdf:Property
+	; api:label "description"
+	; rdfs:label "description"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetResourceClassElementValue a rdf:Property
+	; api:label "resourceType"
+	; rdfs:label "resource type"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetFormatElementValue a rdf:Property
+	; api:label "format"
+	; rdfs:label "format"
+	; rdfs:range xsd:string
+	.
+
+vlo:hasFacetNationalProjectElementValue a rdf:Property
 	; api:label "NationalProject"
-	; rdfs:label "NationalProject"
+	; rdfs:label "National project"
+	; rdfs:range xsd:string
+	.
+	
+vlo:hasFacetKeywordsElementValue a rdf:Property
+	; api:label "keywords"
+	; rdfs:label "keywords"
 	; rdfs:range xsd:string
 	.
