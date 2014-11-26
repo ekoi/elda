@@ -20,7 +20,7 @@ body {
 }
 
 nav.site {
-	background: url(../images/standalone-banner.png) no-repeat 0% 0%;
+	background: url(../images/cmd2rdf-banner.png) no-repeat 0% 0%;
 	padding-top: 54px;
 }
 
@@ -63,7 +63,7 @@ nav.topnav {
 }
 
 .panel header {
-	background: none repeat scroll 0 0 #3B393F;
+	background: none repeat scroll 0 0 #05466F;
 	color: #FFFFFF;
 	padding: 10px;
 }
@@ -176,7 +176,7 @@ div.osCopyright {
 }
 
 nav.topnav section h1 {
-	background: none repeat scroll 0 0 #3B393F;
+	background: none repeat scroll 0 0 #05466F;
 	color: #FFFFFF;
 	font-size: 1em;
 	line-height: 1.231em;
