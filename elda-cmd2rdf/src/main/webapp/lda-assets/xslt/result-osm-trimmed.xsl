@@ -1440,17 +1440,17 @@ $prefLabel, $altLabel, $title and $name variables.
         <ul>
             <li>
                 <xsl:apply-templates select="." mode="pageSize">
+                    <xsl:with-param name="size" select="1" />
+                </xsl:apply-templates>
+            </li>
+            <li>
+                <xsl:apply-templates select="." mode="pageSize">
+                    <xsl:with-param name="size" select="5" />
+                </xsl:apply-templates>
+            </li>
+            <li>
+                <xsl:apply-templates select="." mode="pageSize">
                     <xsl:with-param name="size" select="10" />
-                </xsl:apply-templates>
-            </li>
-            <li>
-                <xsl:apply-templates select="." mode="pageSize">
-                    <xsl:with-param name="size" select="25" />
-                </xsl:apply-templates>
-            </li>
-            <li>
-                <xsl:apply-templates select="." mode="pageSize">
-                    <xsl:with-param name="size" select="50" />
                 </xsl:apply-templates>
             </li>
         </ul>

@@ -28,6 +28,10 @@ cmd:cmd2rdf-lda a api:API
 	; api:sparqlEndpoint <https://catalog.clarin.eu/ds/cmd2rdf/sparql?format=application/atom+xml>
 	# ; api:defaultViewer api:labelledDescribeViewer
 	;api:defaultViewer api:cmdViewer
+	# the page size can't be set higher than this 
+	; api:maxPageSize 10
+	# and this is the default page size
+	; api:defaultPageSize 5 
 	; api:defaultFormatter cmd:HtmlFormatter 
     ; api:formatter
         [a elda:FeedFormatter
@@ -66,7 +70,7 @@ api:cmdViewer a api:Viewer;
 cmd:browse a api:ListEndpoint 
 	; rdfs:label "Browse CMD2RDF Records" 
 	; api:uriTemplate "/browse" 
-	#; api:variable [api:name "uri"]
+	#; api:variable [api:name 'uri' api:type xsd:string]
   
 	; api:selector 
         [ api:where " ?item a <http://www.w3.org/ns/oa#Annotation> . "
@@ -75,10 +79,11 @@ cmd:browse a api:ListEndpoint
 	
 cmd:explore a api:ListEndpoint 
 	; rdfs:label "Explore CMD2RDF Records" 
-	; api:uriTemplate "/explore" 
-  
+	; api:uriTemplate "/explore/{repo}"
+	; api:itemTemplate "https://catalog.clarin.eu/ds/cmd2rdf/graph/{repo}";
 	; api:selector 
-        [ api:where " ?item a <http://www.w3.org/ns/oa#Annotation> . "
+        [ 
+        	api:where " ?item <http://www.clarin.eu/cmdi/inRepository>  <https://catalog.clarin.eu/ds/cmd2rdf/graph/?repo> . graph ?item {?s ?p ?v} . "
         ]	
 	.	
 #
@@ -186,12 +191,13 @@ vlo:hasFacetResourceClassElementValue a rdf:Property
 	; rdfs:label "resource type"
 	; rdfs:range xsd:string
 	.
-
-vlo:hasFacetFormatElementValue a rdf:Property
-	; api:label "format"
-	; rdfs:label "format"
-	; rdfs:range xsd:string
-	.
+	
+# THIS PART IS COMMENT OUT OTHER WISE THE FORMAT LINKS ARE DISAPPEAR
+#vlo:hasFacetFormatElementValue a rdf:Property
+#	; api:label "format"
+#	; rdfs:label "format"
+#	; rdfs:range xsd:string
+#	.
 
 vlo:hasFacetNationalProjectElementValue a rdf:Property
 	; api:label "NationalProject"
